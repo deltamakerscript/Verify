@@ -1,0 +1,209 @@
+-- KEY SYSTEM & LOADER SCRIPT BY ARTEAM
+local Players = game:GetService("Players")
+local CoreGui = game:GetService("CoreGui")
+local TweenService = game:GetService("TweenService")
+local LocalPlayer = Players.LocalPlayer
+local PlayerGui = LocalPlayer:WaitForChild("PlayerGui")
+
+---------------------------------------------------------
+-- CONFIGURATION (PENGATURAN KEY & LINK)
+---------------------------------------------------------
+local CORRECT_KEY = "newscriptfree123" -- Ganti dengan Key pilihanmu
+local GET_KEY_LINK = "https://link-target.net/8883921/hPIxZU9gKs3Y" -- Ganti dengan link Get Key milikmu
+
+-- Masukkan script utama milikmu di dalam fungsi ini
+local function executeMainScript()
+	print("[ARTEAM] Key Valid! Executing Main Script...")
+	
+	-- PASTE SCRIPT UTAMA ATAU LOADSTRING KAMU DI SINI:
+loadstring(game:HttpGet("https://raw.githubusercontent.com/deltamakerscript/Verify-Script/refs/heads/main/Script.txt"))()
+end
+
+---------------------------------------------------------
+-- GUI BUILDER (KEY SYSTEM UI)
+---------------------------------------------------------
+if PlayerGui:FindFirstChild("KeySystemGui") then
+	PlayerGui.KeySystemGui:Destroy()
+end
+
+local keyGui = Instance.new("ScreenGui")
+keyGui.Name = "KeySystemGui"
+keyGui.ResetOnSpawn = false
+keyGui.Parent = PlayerGui
+
+-- Main Frame
+local mainFrame = Instance.new("Frame")
+mainFrame.Name = "MainFrame"
+mainFrame.Size = UDim2.new(0, 320, 0, 220)
+mainFrame.Position = UDim2.new(0.5, -160, 0.35, -110)
+mainFrame.BackgroundColor3 = Color3.fromRGB(25, 25, 35)
+mainFrame.Active = true
+mainFrame.Draggable = true
+mainFrame.Parent = keyGui
+
+local frameCorner = Instance.new("UICorner")
+frameCorner.CornerRadius = UDim.new(0, 8)
+frameCorner.Parent = mainFrame
+
+local frameStroke = Instance.new("UIStroke")
+frameStroke.Color = Color3.fromRGB(0, 120, 215)
+frameStroke.Thickness = 1.5
+frameStroke.Parent = mainFrame
+
+-- Title Bar
+local titleLabel = Instance.new("TextLabel")
+titleLabel.Size = UDim2.new(1, -30, 0, 30)
+titleLabel.Position = UDim2.new(0, 10, 0, 5)
+titleLabel.Text = "KEY SYSTEM - ARTEAM"
+titleLabel.TextColor3 = Color3.fromRGB(240, 240, 240)
+titleLabel.Font = Enum.Font.SourceSansBold
+titleLabel.TextSize = 14
+titleLabel.TextXAlignment = Enum.TextXAlignment.Left
+titleLabel.BackgroundTransparency = 1
+titleLabel.Parent = mainFrame
+
+-- Close Button
+local closeBtn = Instance.new("TextButton")
+closeBtn.Size = UDim2.new(0, 22, 0, 22)
+closeBtn.Position = UDim2.new(1, -28, 0, 6)
+closeBtn.Text = "X"
+closeBtn.TextColor3 = Color3.fromRGB(255, 100, 100)
+closeBtn.BackgroundColor3 = Color3.fromRGB(50, 30, 30)
+closeBtn.Font = Enum.Font.SourceSansBold
+closeBtn.TextSize = 12
+closeBtn.Parent = mainFrame
+
+local closeCorner = Instance.new("UICorner")
+closeCorner.CornerRadius = UDim.new(0, 4)
+closeCorner.Parent = closeBtn
+
+closeBtn.MouseButton1Click:Connect(function()
+	keyGui:Destroy()
+end)
+
+-- Subtitle / Info Text
+local infoLabel = Instance.new("TextLabel")
+infoLabel.Size = UDim2.new(1, -20, 0, 25)
+infoLabel.Position = UDim2.new(0, 10, 0, 35)
+infoLabel.Text = "Masukkan Key untuk mengakses script!"
+infoLabel.TextColor3 = Color3.fromRGB(170, 170, 180)
+infoLabel.Font = Enum.Font.SourceSansBold
+infoLabel.TextSize = 12
+infoLabel.BackgroundTransparency = 1
+infoLabel.Parent = mainFrame
+
+-- Key Input Box
+local keyBox = Instance.new("TextBox")
+keyBox.Name = "KeyBox"
+keyBox.Size = UDim2.new(1, -20, 0, 35)
+keyBox.Position = UDim2.new(0, 10, 0, 65)
+keyBox.PlaceholderText = "Paste Key Di Sini..."
+keyBox.Text = ""
+keyBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+keyBox.PlaceholderColor3 = Color3.fromRGB(130, 130, 140)
+keyBox.BackgroundColor3 = Color3.fromRGB(40, 40, 50)
+keyBox.Font = Enum.Font.SourceSansBold
+keyBox.TextSize = 13
+keyBox.ClearTextOnFocus = false
+keyBox.Parent = mainFrame
+
+local keyBoxCorner = Instance.new("UICorner")
+keyBoxCorner.CornerRadius = UDim.new(0, 6)
+keyBoxCorner.Parent = keyBox
+
+-- Status Label (Pesan Error / Berhasil)
+local statusLabel = Instance.new("TextLabel")
+statusLabel.Size = UDim2.new(1, -20, 0, 20)
+statusLabel.Position = UDim2.new(0, 10, 0, 105)
+statusLabel.Text = ""
+statusLabel.TextColor3 = Color3.fromRGB(255, 80, 80)
+statusLabel.Font = Enum.Font.SourceSansBold
+statusLabel.TextSize = 11
+statusLabel.BackgroundTransparency = 1
+statusLabel.Parent = mainFrame
+
+-- Get Key Button (Salin Link)
+local getKeyBtn = Instance.new("TextButton")
+getKeyBtn.Name = "GetKeyBtn"
+getKeyBtn.Size = UDim2.new(0, 142, 0, 35)
+getKeyBtn.Position = UDim2.new(0, 10, 0, 130)
+getKeyBtn.Text = "Get Key"
+getKeyBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+getKeyBtn.BackgroundColor3 = Color3.fromRGB(50, 50, 65)
+getKeyBtn.Font = Enum.Font.SourceSansBold
+getKeyBtn.TextSize = 13
+getKeyBtn.Parent = mainFrame
+
+local getKeyCorner = Instance.new("UICorner")
+getKeyCorner.CornerRadius = UDim.new(0, 6)
+getKeyCorner.Parent = getKeyBtn
+
+-- Enter Key Button (Submit)
+local enterKeyBtn = Instance.new("TextButton")
+enterKeyBtn.Name = "EnterKeyBtn"
+enterKeyBtn.Size = UDim2.new(0, 142, 0, 35)
+enterKeyBtn.Position = UDim2.new(1, -152, 0, 130)
+enterKeyBtn.Text = "Enter Key"
+enterKeyBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+enterKeyBtn.BackgroundColor3 = Color3.fromRGB(0, 120, 215)
+enterKeyBtn.Font = Enum.Font.SourceSansBold
+enterKeyBtn.TextSize = 13
+enterKeyBtn.Parent = mainFrame
+
+local enterKeyCorner = Instance.new("UICorner")
+enterKeyCorner.CornerRadius = UDim.new(0, 6)
+enterKeyCorner.Parent = enterKeyBtn
+
+-- Watermark Text
+local watermark = Instance.new("TextLabel")
+watermark.Size = UDim2.new(1, -20, 0, 20)
+watermark.Position = UDim2.new(0, 10, 0, 190)
+watermark.Text = "By: ARTEAM | TikTok: ihateyouforeverandeverrr"
+watermark.TextColor3 = Color3.fromRGB(120, 120, 140)
+watermark.Font = Enum.Font.SourceSansBold
+watermark.TextSize = 10
+watermark.BackgroundTransparency = 1
+watermark.Parent = mainFrame
+
+---------------------------------------------------------
+-- LOGIC & BUTTON EVENTS
+---------------------------------------------------------
+
+-- Action tombol Get Key: Menyalin link ke Clipboard
+getKeyBtn.MouseButton1Click:Connect(function()
+	pcall(function()
+		if setclipboard then
+			setclipboard(GET_KEY_LINK)
+		elseif toclipboard then
+			toclipboard(GET_KEY_LINK)
+		end
+	end)
+	
+	statusLabel.TextColor3 = Color3.fromRGB(80, 220, 120)
+	statusLabel.Text = "Link Get Key disalin ke Clipboard!"
+	task.delay(3, function()
+		if statusLabel.Text == "Link Get Key disalin ke Clipboard!" then
+			statusLabel.Text = ""
+		end
+	end)
+end)
+
+-- Action tombol Enter Key: Validasi Key
+enterKeyBtn.MouseButton1Click:Connect(function()
+	local inputKey = string.gsub(keyBox.Text, "%s+", "") -- Menghapus spasi yang tidak sengaja
+	
+	if inputKey == CORRECT_KEY then
+		statusLabel.TextColor3 = Color3.fromRGB(80, 220, 120)
+		statusLabel.Text = "Key Benar! Menjalankan script..."
+		
+		task.wait(1)
+		keyGui:Destroy()
+		
+		-- Jalankan script utama
+		executeMainScript()
+	else
+		statusLabel.TextColor3 = Color3.fromRGB(255, 80, 80)
+		statusLabel.Text = "Key Salah! Silakan coba lagi."
+		keyBox.Text = ""
+	end
+end)
